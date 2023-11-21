@@ -1,5 +1,7 @@
 let ball;
 
+const ioClient = io.connect("ws://localhost:8001");
+
 function setup() {
 	new Canvas(500, 500);
 

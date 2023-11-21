@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "client": "python -m http.server -d client 8000"
+    "client": "python -m http.server 8000"
   },
   "author": "",
   "license": "ISC"
