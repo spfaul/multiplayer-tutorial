@@ -45,9 +45,9 @@ socket.on("playerDataUpdate", (id, playerData) => {
 })
 
 socket.on("removeClient", id => {
-    let playerData = entities.get(id);
+    let playerData = em.get(id);
     if (playerData) {
         playerData.sprite.remove();
-        entities.delete(id);
+        em.delete(id);
     }
 });

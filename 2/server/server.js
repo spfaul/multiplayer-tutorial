@@ -6,7 +6,7 @@ const io = new Server(8001, {
     },
 });
 const clients = new Set();
-const TICK_DELAY = 1000 / 60;
+const TICK_DELAY = 1000 / 20;
 
 function Client(socket) {
     this.socket = socket;
@@ -39,6 +39,7 @@ function tick() {
             id: c.socket.id
         }
     });
+    console.log(clients.size)
     for (let c of clients) {
         c.socket.emit("playerDataUpdate", c.socket.id, allData);
     }

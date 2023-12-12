@@ -7,6 +7,14 @@ class EntityManager {
         return this.entities.has(id);
     }
 
+    get(id) {
+        return this.entities.get(id);
+    }
+
+    delete(id) {
+        return this.entities.delete(id);
+    }
+
     registerNewPlayer(data) {
         const playerSprite = new Sprite(data.position.x, data.position.y);
         playerSprite.diameter = 50;
