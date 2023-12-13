@@ -5,9 +5,7 @@ let em = new EntityManager();
 
 function setup() {
     new Canvas("fullscreen");
-
-    ball = new Sprite();
-    ball.diameter = 50;
+    ball = createPlayerSprite();
 }
 
 function draw() {
@@ -19,7 +17,7 @@ function draw() {
 
 function interpolateOtherPlayers() {
     const now = +new Date();
-    const EXPECTED_SERVER_TICK_RATE = 10;
+    const EXPECTED_SERVER_TICK_RATE = 60;
     const est_render_timestamp = now - 1000.0 / EXPECTED_SERVER_TICK_RATE;
     for (const [id, playerData] of em.entities) {
         if (id == socket.id || playerData.positionBuffer.length < 2) {

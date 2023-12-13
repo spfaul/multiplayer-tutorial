@@ -16,8 +16,9 @@ class EntityManager {
     }
 
     registerNewPlayer(data) {
-        const playerSprite = new Sprite(data.position.x, data.position.y);
-        playerSprite.diameter = 50;
+        let playerSprite = createPlayerSprite();
+        playerSprite.x = data.position.x;
+        playerSprite.y = data.position.y;
         this.entities.set(data.id, {
             sprite: playerSprite,
             positionBuffer: [],
@@ -43,4 +44,10 @@ class EntityManager {
             );
         }
     }
+}
+
+function createPlayerSprite() {
+    let ball = new Sprite();
+    ball.diameter = 50;
+    return ball;
 }
