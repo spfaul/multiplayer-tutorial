@@ -69,6 +69,20 @@ function move() {
     }
 }
 
+socket.on("buildMap", (mapData) => {
+    for (const blockData of Object.values(mapData.blocks)) {
+        let group = new Group();
+        Object.assign(group, blockData);
+        new Tiles(
+            blockData.tileMap,
+            blockData.startX,
+            blockData.startY,
+            blockData.w,
+            blockData.h
+        );
+    }
+});
+
 socket.on("playerDataUpdate", (id, playerData) => {
     for (let data of playerData) {
         if (data.id === id) continue;

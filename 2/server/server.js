@@ -1,4 +1,5 @@
 import { Server } from "socket.io";
+import { readFileSync } from "fs";
 
 const io = new Server(8001, {
     cors: {
@@ -6,7 +7,8 @@ const io = new Server(8001, {
     },
 });
 const clients = new Set();
-const TICK_DELAY = 1000 / 30;
+const TICK_DELAY = 1000 / 60;
+const MAPS_DATA = JSON.parse(readFileSync("./maps.json"));
 
 function Client(socket) {
     this.socket = socket;
@@ -19,6 +21,7 @@ io.on("connection", (socket) => {
     console.log("New connection!");
     let client = new Client(socket);
     clients.add(client);
+    socket.emit("buildMap", MAPS_DATA.myWorld);
 
     socket.on("position", (x, y) => {
         client.position = { x, y };
@@ -39,7 +42,6 @@ function tick() {
             id: c.socket.id,
         };
     });
-    console.log(clients.size);
     for (let c of clients) {
         c.socket.emit("playerDataUpdate", c.socket.id, allData);
     }
