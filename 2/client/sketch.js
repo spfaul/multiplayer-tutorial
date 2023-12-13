@@ -1,17 +1,22 @@
 let ball;
+let em;
+let camManager;
 
 const socket = io.connect("ws://localhost:8001");
-let em = new EntityManager();
 
 function setup() {
     new Canvas("fullscreen");
+    em = new EntityManager();
+    camManager = new CameraManager(camera);
     ball = createPlayerSprite();
+    camManager.setTarget(ball);
 }
 
 function draw() {
     background("grey");
     move();
     interpolateOtherPlayers();
+    camManager.update();
     socket.emit("position", ball.pos.x, ball.pos.y);
 }
 
